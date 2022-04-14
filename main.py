@@ -4,7 +4,7 @@ counter=0
 stred=[2,2]
 display()
 console.log_value("stred", stred)
-
+switch=True
 
 def vypocet():
     global obraz, body
@@ -19,6 +19,7 @@ def vypocet():
     
 def display():
     global obraz,body
+    basic.clear_screen()
     led.plot_brightness(stred[0], stred[1],100)
     vypocet()
     typ=body
@@ -30,22 +31,19 @@ def display():
         typ=obraz      
     
 console.log_value("body", body)
-    
-def on_forever():
+def otaceni(y):
     global body
-    counter=0
-    counter_h=0
-    
-    console.log_value("counter", counter_h)
-    console.log_value("counter2", counter)
     basic.clear_screen()
-    display()
+    body[0].reverse()
+    body[0][y]= abs(body[0][y]-4)
+    body[1].reverse()
+    body[1][y]= abs(body[1][y]-4)
+    body[2].reverse()
+    body[2][y]= abs(body[2][y]-4)
+    body[3].reverse()
+    body[3][y]= abs(body[3][y]-4)
+def on_forever():
     basic.pause(500)
-    if body[0][0]==0:
-        for h in body:
-            body[counter_h][0]+=1
-            counter_h+=1
-    
-    
-
-forever(on_forever)
+    otaceni(1)
+    display()
+basic.forever(on_forever)

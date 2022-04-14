@@ -4,6 +4,7 @@ let counter = 0
 let stred = [2, 2]
 display()
 console.logValue("stred", stred)
+let switch_ = true
 function vypocet() {
     
     let counter = 0
@@ -20,6 +21,7 @@ function vypocet() {
 function display() {
     let counter: number;
     
+    basic.clearScreen()
     led.plotBrightness(stred[0], stred[1], 100)
     vypocet()
     let typ = body
@@ -34,20 +36,21 @@ function display() {
 }
 
 console.logValue("body", body)
-forever(function on_forever() {
+function otaceni(y: number) {
     
-    let counter = 0
-    let counter_h = 0
-    console.logValue("counter", counter_h)
-    console.logValue("counter2", counter)
     basic.clearScreen()
-    display()
+    body[0].reverse()
+    body[0][y] = Math.abs(body[0][y] - 4)
+    body[1].reverse()
+    body[1][y] = Math.abs(body[1][y] - 4)
+    body[2].reverse()
+    body[2][y] = Math.abs(body[2][y] - 4)
+    body[3].reverse()
+    body[3][y] = Math.abs(body[3][y] - 4)
+}
+
+basic.forever(function on_forever() {
     basic.pause(500)
-    if (body[0][0] == 0) {
-        for (let h of body) {
-            body[counter_h][0] += 1
-            counter_h += 1
-        }
-    }
-    
+    otaceni(1)
+    display()
 })
